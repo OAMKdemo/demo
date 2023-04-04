@@ -11,7 +11,16 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.static("public"));
 const port = 3001;
 app.get('/', (req, res) => {
-    res.status(200).json({ result: 'success' });
+
+    const pool = openDb();
+    pool.query('select * from image', (error, result) => {
+        if (error) {
+            res.statusMessage = error.message;
+            res.status(500).json({ error: error.message });
+            return;
+        }
+        res.status(200).json(result.rows);
+    });n
 });
 const openDb = () => {
     const pool = new pg_1.Pool({
