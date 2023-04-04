@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express'
 import cors from 'cors'
 import { Pool,QueryResult } from 'pg'
 
+
 const app: Express = express()
 
 app.use(cors())
